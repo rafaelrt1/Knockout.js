@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Procurar usuário do GitHub</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
+</head>
+
+<body>
+	<main>
+		<div class="position-relative">
+			<div class="position-absolute top-0 start-50 translate-middle-x">
+				<form class="row user-input">
+					<div class="col-6">
+						<label for="user-input" class="visually-hidden"></label>
+						<input
+							data-bind="value: $data.git_user, click: $data.hasFocus(), hasFocus: $data.hasFocus(), css: {'invalid': $data.input_warning()}"
+							id="user-input" type="text" class="form-control" placeholder="Username">
+						<span data-bind="visible: $data.input_warning()" class="error-text">Usuário inválido</span>
+					</div>
+					<div class="col-2">
+						<button data-bind="click: $data.validateUser" type="submit"
+							class="btn btn-primary">Pesquisar</button>
+
+					</div>
+				</form>
+			</div>
+
+			<!-- ko if: user_not_found -->
+			<h3 class="text-center user-not-found" data-bind="visible: $data.user_not_found()">Usuário não encontrado
+			</h3>
+			<!-- /ko -->
+
+			<!-- ko if: has_user_data -->
+			<div class="profile">
+				<div class="profile-link text-center">
+					<a data-bind="attr: {href: $data.object_data_user().html_url}" target="_blank">
+						<h4 data-bind="text: $data.object_data_user().login"></h4>
+					</a>
+				</div>
+				<div class="text-center">
+					<img data-bind="attr: {src: $data.object_data_user().avatar_url}"
+						class="img-fluid rounded-circle center-block">
+				</div>
+				<!-- ko if: $data.object_user_repos().length > 0 -->
+				<div class="repos">
+					<h2 data-bind="text: $data.repos_amount_text()" class="text-center">
+						Repositórios</h2>
+					<div class="text-center" data-bind="foreach: $data.object_user_repos()">
+						<a data-bind="attr: {href: $data.link}" target="_blank">
+							<p data-bind="text: $data.name"></p>
+						</a>
+					</div>
+				</div>
+				<!-- /ko -->
+			</div>
+			<!-- /ko -->
+		</div>
+	</main>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<!-- <script src="//cdn.jsdelivr.net/npm/less@4.1.1"></script> -->
+	<!-- <script type="text/javascript" src="../js/knockout.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"
+		integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript" src="../js/script.js"></script>
+
+</body>
+
+</html>

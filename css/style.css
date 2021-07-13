@@ -1,0 +1,21 @@
+.profile, .user-not-found {
+    position: relative;
+    top: 5rem;
+}
+
+.repos {
+    margin-bottom: 7rem;
+    margin-top: 2rem;
+}
+
+.user-input {
+    margin-top: 1rem;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.error-text {
+    color: red;
+}
